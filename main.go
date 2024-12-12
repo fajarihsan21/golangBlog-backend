@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"net/http"
+	"os"
 	"time"
 
 	"github.com/gin-gonic/gin"
@@ -17,7 +18,7 @@ func main() {
 		})
 	})
 
-	port := "8080"
+	port := os.Getenv("APPPORT")
 	server := &http.Server{
 		Addr:         fmt.Sprintf(":%d", port),
 		Handler:      router,
@@ -26,7 +27,7 @@ func main() {
 		IdleTimeout:  10 * time.Minute, // Timeout for idle connections
 	}
 
-	fmt.Println(fmt.Sprintf("LINTAS SR TOOLS SERVICE STARTED ON PORT %d", port))
+	fmt.Println(fmt.Sprintf("SERVICE STARTED ON PORT %d", port))
 
 	if err := server.ListenAndServe(); err != nil {
 		fmt.Printf("Server failed to start: %v\n", err)
