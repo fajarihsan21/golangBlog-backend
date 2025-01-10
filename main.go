@@ -2,11 +2,13 @@ package main
 
 import (
 	"fmt"
+	"log"
 	"net/http"
 	"os"
 	"time"
 
 	"github.com/gin-gonic/gin"
+	"github.com/joho/godotenv"
 )
 
 func main() {
@@ -17,6 +19,14 @@ func main() {
 			"message": "pong",
 		})
 	})
+
+	_, err := os.Stat(".env")
+	if !os.IsNotExist(err) {
+		errEnv := godotenv.Load()
+		if errEnv != nil {
+			log.Fatal("Error loading .env file")
+		}
+	}
 
 	port := os.Getenv("APPPORT")
 	server := &http.Server{

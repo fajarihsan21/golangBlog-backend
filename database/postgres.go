@@ -15,10 +15,10 @@ type Postgres struct {
 }
 
 var (
-	host = os.Getenv("HOST")
-	port = os.Getenv("PORT")
+	host   = os.Getenv("HOST")
+	port   = os.Getenv("PORT")
 	dbName = os.Getenv("DBNAME")
-	pwd = os.Getenv("DBPWD")
+	pwd    = os.Getenv("DBPWD")
 )
 
 func New() *Postgres {
